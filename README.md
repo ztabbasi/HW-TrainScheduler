@@ -2,43 +2,63 @@
 
 Train Scheduler : The page allows you to add new trains with their destinations, start times and frequencies.  It then add the train to the bulleting and gives the train name, destination, frequency, next arrival time and minutes to the next arrival
 
-Link to the site
-Crystal Game
+# Link to the site
 
-Images
-Picture
+[Train Scheduler Game](https://ztabbasi.github.io/HW-TrainScheduler/)
 
-Technologies used
-HTML CSS Javascript Jquery
+# Images
 
-code snippets
-Test which crystal was clicked and add based on the crystal's hidden value and check if still below total
+![Picture](assets/images/trainScheduler.PNG)
 
-var crystalValue = ($(this).attr("data-crystalvalue"));
-crystalValue = parseInt(crystalValue);
-// We then add the crystalValue to the user's "counter" which is a global variable.
-// Every click, from every crystal adds to the global counter.
-counter += crystalValue;
+# Technologies used
 
-// All of the same game win-lose logic applies. So the rest remains unchanged.
-//alert("New score: " + counter);
-$("#score").text(counter);
-   
-if (counter === targetNumber) {
-  wins++;
-  $("#wins").text(wins);
-  counter=0;
-  resetGame();
-}
+HTML,
+CSS,
+Javascript
+and Firebase
 
-else if (counter >= targetNumber) {
-  losses++;
-  $("#losses").text(losses);
-  counter=0;
-  resetGame();
-}
-Author
+
+
+# code snippets
+
+The code snipet below initializes the Firebase database.  It then creates a "submit" button to add a train
+using train name, destination, first train of day and frequency as inputs. It then uses a temporary train
+object to store that information.
+
+// 1. Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCER01ei_LIHw6BEh2tz_MaglCti50I_4c",
+    authDomain: "custom-no-share.firebaseapp.com",
+    databaseURL: "https://custom-no-share.firebaseio.com",
+    projectId: "custom-no-share",
+    storageBucket: "custom-no-share.appspot.com",
+    messagingSenderId: "708411308872"
+  };
+  firebase.initializeApp(config);
+  
+  var database = firebase.database();
+  
+  // 2. Button for adding Train
+  $("#add-train-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    // Grabs user input
+    var trainName = $("#train-name-input").val().trim();
+    var destination = $("#destination-input").val().trim();
+    var firstTrain = $("#first-train-input").val().trim();
+    var frequency = $("#frequency-input").val().trim();
+  
+    // Creates local "temporary" object for holding employee data
+    var newTrain = {
+      name: trainName,
+      dest: destination,
+      first: firstTrain,
+      freq: frequency
+    };
+
+
+# Author 
 Zia Abbasi
 
-License
+# License
 Standard MIT License
